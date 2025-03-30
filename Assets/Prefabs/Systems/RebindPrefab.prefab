@@ -580,6 +580,8 @@ MonoBehaviour:
   rebindButton: {fileID: 7618777769625267829}
   rebindText: {fileID: 1908920244957874815}
   resetButton: {fileID: 5782768628223221881}
+  rebindOverlay: {fileID: 0}
+  rebindOverlayText: {fileID: 0}
 --- !u!222 &7302341508844902951
 CanvasRenderer:
   m_ObjectHideFlags: 0

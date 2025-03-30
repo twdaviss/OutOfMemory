@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: 2
   prompt: {fileID: 2076529143712726272}
+  endOfDemo: 0
 --- !u!58 &2452643484666130894
 CircleCollider2D:
   m_ObjectHideFlags: 0
