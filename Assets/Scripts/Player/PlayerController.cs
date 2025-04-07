@@ -42,7 +42,7 @@ public class PlayerController : PlayerStateMachine
 
     public void InputHandler()
     {
-        moveDirection = InputManager.Instance.GetMoveDirection();
+        moveDirection = InputManager.moveDirection;
         if(moveDirection.magnitude > 0.5)
         {
             prevDirection = moveDirection;

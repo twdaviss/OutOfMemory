@@ -1149,7 +1149,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2695427729810030550}
   - component: {fileID: 4116793678636239229}
-  - component: {fileID: 1804793534740944912}
   - component: {fileID: 7845588307299268671}
   - component: {fileID: 2889909555047280422}
   - component: {fileID: 2925801208055450526}
@@ -1207,23 +1206,6 @@ MonoBehaviour:
   grappleCooldownIcon: {fileID: 6066471259677540528}
   scrapCooldownIcon: {fileID: 918780741136040855}
   ammoCount: {fileID: 3174029602690766727}
-  enableRicochet: 0
-  increaseKnockBack: 0
-  enableGrapplePull: 0
-  enableAutoHeal: 0
---- !u!114 &1804793534740944912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237712035881920399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c5d39b472bc804d936cb975220a28b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeCamera: {fileID: 0}
 --- !u!114 &7845588307299268671
 MonoBehaviour:
   m_ObjectHideFlags: 0

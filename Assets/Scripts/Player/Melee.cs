@@ -28,7 +28,7 @@ public class Melee : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.increaseKnockBack)
+        if(GameManager.increaseKnockBack)
         {
             currentKnockback = knockBack * 2.0f; 
         }

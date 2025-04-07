@@ -31,7 +31,7 @@ public class ScrapShot : MonoBehaviour
 
     private void Update()
     {
-        canRicochet = GameManager.Instance.enableRicochet;
+        canRicochet = GameManager.enableRicochet;
         coolDownTimer += Time.deltaTime;
         if(currentAmmo > maxAmmo)
         {
@@ -76,7 +76,7 @@ public class ScrapShot : MonoBehaviour
             audioSource.pitch = -1.5f;
             audioSource.timeSamples = projectile.samples - 1;
             audioSource.Play();
-            InputManager.Instance.MagnetizeScrap();
+            InputManager.MagnetizeScrap();
             coolDownTimer = 0;
         }
     }
@@ -104,7 +104,7 @@ public class ScrapShot : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position;
         spawnPosition.z -= 1;
-        Vector2 aimDirection = InputManager.Instance.GetAimDirection(transform.position); 
+        Vector2 aimDirection = InputManager.GetAimDirection(transform.position); 
         scrap.SetParameters(scrapSpeed, scrapDamage, scrapStun, scrapRange, aimDirection, playerController.gameObject);
         scrap.transform.position = spawnPosition;
         scrap.gameObject.SetActive(true);

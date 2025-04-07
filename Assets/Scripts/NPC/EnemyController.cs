@@ -225,7 +225,7 @@ public class EnemyController : EnemyStateMachine
                 return;
             }
         }
-        path = Pathfinding.Instance.FindPath(this.transform.position, destination);
+        path = GameManager.Instance.FindPath(this.transform.position, destination);
     }
 
     public void GetPathToDestination(Vector2 dest)

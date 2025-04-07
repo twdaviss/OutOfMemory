@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        autoHeal = GameManager.Instance.enableAutoHeal;
+        autoHeal = GameManager.enableAutoHeal;
         if (invincibilityTime > 0.0f) { invincibilityTime -= Time.deltaTime; }
         else
         {

@@ -30,7 +30,7 @@ public class Grapple : MonoBehaviour
 
     private void Update()
     {
-        canGrapplePull = GameManager.Instance.enableGrapplePull;
+        canGrapplePull = GameManager.enableGrapplePull;
         grappleCooldownTimer += Time.deltaTime;
         if (InputManager.playerControls.Gameplay.Grapple.inProgress)
         {
@@ -170,8 +170,8 @@ public class Grapple : MonoBehaviour
         GameManager.Instance.SetSlowMoTimeScale();
         GameManager.Instance.EnableHighlight();
         isAimingGrapple = true;
-        Vector2 mousePosition = InputManager.Instance.GetMousePosition();
-        Vector3 aimDirection = InputManager.Instance.GetAimDirection(playerController.transform.position);
+        Vector2 mousePosition = InputManager.mouseScreenPosition;
+        Vector3 aimDirection = InputManager.GetAimDirection(playerController.transform.position);
 
         playerController.playerAnimator.SetBool("isBuildingUp", true);
 
@@ -180,7 +180,7 @@ public class Grapple : MonoBehaviour
 
         int layerMask = LayerMask.GetMask("Enemies") | LayerMask.GetMask("Grapple");
 
-        Ray mouseRay = Camera.main.ScreenPointToRay(InputManager.Instance.GetMousePosition());
+        Ray mouseRay = Camera.main.ScreenPointToRay(InputManager.mouseScreenPosition);
         RaycastHit raycast = new RaycastHit();
         Physics.Raycast(mouseRay, out raycast, 120, layerMask);
         //Debug.DrawLine(mouseRay.origin, mouseRay.origin + mouseRay.direction * 30, Color.red);

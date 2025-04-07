@@ -4,8 +4,9 @@ using RobotGame;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 public enum GameScene
 {
     Mainmenu,
@@ -31,12 +32,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image scrapCooldownIcon;
     [SerializeField] private TextMeshProUGUI ammoCount;
 
-    public static GameManager Instance {  get; private set; }
-    private Pathfinding pathfinder;
+    public static GameManager Instance { get; private set; }
 
     private Grid<PathNode> currentGrid;
     public Grid<PathNode> ActiveGrid { get { return currentGrid; } }
-    private float _gameSpeed = 1.0f;
+    private static float _gameSpeed = 1.0f;
     public float GameSpeed { get { return _gameSpeed; } }
 
     public delegate void UnPaused();
@@ -48,10 +48,24 @@ public class GameManager : MonoBehaviour
     public delegate void UnHighlight();
     public static event UnHighlight onUnHighlight;
 
-    public bool enableRicochet = false;
-    public bool increaseKnockBack = false;
-    public bool enableGrapplePull = false;
-    public bool enableAutoHeal = false;
+    public static bool enableRicochet = false;
+    public static bool increaseKnockBack = false;
+    public static bool enableGrapplePull = false;
+    public static bool enableAutoHeal = false;
+
+    private static Pathfinding pathfinder = null;
+    private Pathfinding Pathfinder {
+        get
+        {
+            if (pathfinder == null) 
+            { 
+                pathfinder = new Pathfinding(currentGrid); 
+                return pathfinder; 
+            }
+            InputManager.Initialize();
+            return pathfinder;
+        }
+    }
 
     private void Start()
     {
@@ -64,14 +78,11 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
         {
             //Instance is not the same as the one we have, destroy old one, and reset to newest one
-            enableRicochet = Instance.enableRicochet;
-            increaseKnockBack= Instance.increaseKnockBack;
-            enableGrapplePull= Instance.enableGrapplePull;
-            enableAutoHeal= Instance.enableAutoHeal;
             Destroy(Instance.gameObject);
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        
         DisableMenus();
         return;
     }
@@ -106,7 +117,6 @@ public class GameManager : MonoBehaviour
         {
             currentGrid = gridMaps[0].GetGrid();
         }
-        pathfinder = new Pathfinding(currentGrid);
     }
     #endregion
 
@@ -117,6 +127,21 @@ public class GameManager : MonoBehaviour
         FreezeTimeScale();
         PauseMenu.SetActive(true);
     }
+    public void EnableDialogueMode()
+    {
+        FreezeTimeScale();
+        InputManager.playerControls.Gameplay.Disable();
+        InputManager.playerControls.Menu.Disable();
+        InputManager.playerControls.Dialogue.Enable();
+        InputManager.moveDirection = Vector3.zero;
+    }
+
+    public void DisableDialogueMode()
+    {
+        StartCoroutine(ResetTimeScale());
+        InputManager.playerControls.Dialogue.Disable();
+        InputManager.playerControls.Gameplay.Enable();
+    }
 
     public void DisableMenus()
     {
@@ -125,7 +150,7 @@ public class GameManager : MonoBehaviour
         OptionsMenu.SetActive(false);
         TutorialPanel.SetActive(false);
         DeathScreen.SetActive(false);
-        onUnPaused();
+        onUnPaused?.Invoke();
     }
     public void EnableDeathScreen()
     {
@@ -282,4 +307,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
     #endregion
+
+    public List<Vector3> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
+    {
+        return Pathfinder.FindPath(startWorldPosition, endWorldPosition);
+    }
 }

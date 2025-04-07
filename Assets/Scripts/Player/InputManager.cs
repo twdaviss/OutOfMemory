@@ -1,14 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using System;
 using TMPro;
-using System.Linq;
 
-public class InputManager : MonoBehaviour
+public class InputManager
 {
-    public static InputManager Instance { get; private set; }
-
     public static PlayerControls playerControls;
 
     public static event Action rebindCompleted;
@@ -17,12 +13,11 @@ public class InputManager : MonoBehaviour
     public static event Action<InputAction, int> rebindStarted;
     public static event Action<bool, string, string> compositeBeingRebound;
 
-    [SerializeField] private Camera activeCamera;
+    //[SerializeField] private Camera activeCamera;
 
-    private Vector3 mouseScreenPosition;
-    private Vector3 moveDirection;
-
-    private Vector2 aimDirection;
+    public static Vector3 mouseScreenPosition;
+    public static Vector3 moveDirection;
+    public static Vector2 aimDirection;
 
     public delegate void OnPaused();
     public static event OnPaused onPaused;
@@ -54,34 +49,12 @@ public class InputManager : MonoBehaviour
     public delegate void OnMagnetizeScrap();
     public static event OnMagnetize onMagnetizeScrap;
 
-    void Awake()
+    public static void Initialize()
     {
-        if (Instance == null)
-        {
-            //First run, set the instance
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (Instance != this)
-        {
-            //Instance is not the same as the one we have, destroy old one, and reset to newest one
-            Destroy(Instance.gameObject);
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        if (playerControls == null)
-        {
-            playerControls = new PlayerControls();
-        }
-    }
-    private void Start()
-    {
-        //playerControls.Menu.Disable();
-        //playerControls.Gameplay.Enable();
+        Subscribe();
     }
 
-    public void PauseGame(InputAction.CallbackContext context)
+    public static void PauseGame(InputAction.CallbackContext context)
     {
         onPaused?.Invoke();
         if (GameManager.Instance.IsOptionsMenuEnabled())
@@ -109,39 +82,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void EnableDialogueMode()
-    {
-        GameManager.Instance.FreezeTimeScale();
-        playerControls.Gameplay.Disable();
-        playerControls.Menu.Disable();
-        playerControls.Dialogue.Enable();
-        moveDirection = Vector3.zero;
-    }
-
-    public void DisableDialogueMode()
-    {
-        StartCoroutine(GameManager.Instance.ResetTimeScale());
-        playerControls.Dialogue.Disable();
-        playerControls.Gameplay.Enable();
-    }
-
-    public void ContinuePressed()
+    public static void ContinuePressed()
     {
         onContinue?.Invoke();
     }
 
-    public void UnPauseGame()
+    public static void UnPauseGame()
     {
         playerControls.Menu.Disable();
         playerControls.Gameplay.Enable();
     }
 
-    public Vector3 GetMousePosition()
-    {
-        return mouseScreenPosition;
-    }
-
-    public Vector2 GetAimDirection(Vector3 position)
+    public static Vector2 GetAimDirection(Vector3 position)
     {
         if(aimDirection != null && aimDirection != Vector2.zero)
         {
@@ -150,7 +102,7 @@ public class InputManager : MonoBehaviour
         }
 
         Plane plane = new Plane(Vector3.back, 0.0f);
-        Ray mouseRay = Camera.main.ScreenPointToRay(InputManager.Instance.GetMousePosition());
+        Ray mouseRay = Camera.main.ScreenPointToRay(InputManager.mouseScreenPosition);
         Vector3 hitPoint = Vector3.zero;
         float enter;
         if (plane.Raycast(mouseRay, out enter))
@@ -163,7 +115,7 @@ public class InputManager : MonoBehaviour
         return mouseDirection;
     }
 
-    public void InteractPressed()
+    public static void InteractPressed()
     {
         onInteract?.Invoke();
     }
@@ -177,30 +129,30 @@ public class InputManager : MonoBehaviour
         onSprint?.Invoke();
     }
 
-    private void ScrapShot()
+    private static void ScrapShot()
     {
         onScrapShot?.Invoke();
     }
 
-    private void GrappleStart()
+    private static void GrappleStart()
     {
         onGrappleStart?.Invoke();
     }
-    private void GrappleStop()
+    private static void GrappleStop()
     {
         onGrappleStop?.Invoke();
     }
-    private void Melee()
+    private static void Melee()
     {
         onMelee?.Invoke();
     }
 
-    private void Magnetize()
+    private static void Magnetize()
     {
         onMagnetize?.Invoke();
     }
 
-    public void MagnetizeScrap()
+    public static void MagnetizeScrap()
     {
         onMagnetizeScrap?.Invoke();
     }
@@ -355,14 +307,24 @@ public class InputManager : MonoBehaviour
         SaveBindingOverride(action);
     }
 
-    private void OnDrawGizmos()
+    ~InputManager()
     {
-        Gizmos.color = Color.red;
-        Ray mouseRay = Camera.main.ScreenPointToRay(mouseScreenPosition);
-        Gizmos.DrawLine(mouseRay.origin, mouseRay.origin + mouseRay.direction * 30);
+        GameManager.onUnPaused -= UnPauseGame;
+        playerControls.Gameplay.Pause.performed -= PauseGame;
+        playerControls.Menu.Pause.performed -= PauseGame;
+        playerControls.Gameplay.Mouse.performed -= ctx => mouseScreenPosition = ctx.ReadValue<Vector2>();
+        playerControls.Gameplay.Move.performed -= ctx => moveDirection = ctx.ReadValue<Vector2>();
+        playerControls.Gameplay.Scrap.performed -= ctx => ScrapShot();
+        playerControls.Gameplay.Magnetize.performed -= ctx => Magnetize();
+        playerControls.Gameplay.Spin.performed -= ctx => Melee();
+        playerControls.Gameplay.Grapple.performed -= ctx => GrappleStart();
+        playerControls.Gameplay.Grapple.canceled -= ctx => GrappleStop();
+        playerControls.Gameplay.Aim.performed -= ctx => aimDirection = ctx.ReadValue<Vector2>();
+        playerControls.Gameplay.Interact.performed -= ctx => InteractPressed();
+        playerControls.Dialogue.Continue.performed -= ctx => ContinuePressed();
     }
 
-    private void OnEnable()
+    private static void Subscribe()
     {
         playerControls.Gameplay.Enable();
         GameManager.onUnPaused += UnPauseGame;
@@ -380,22 +342,10 @@ public class InputManager : MonoBehaviour
         playerControls.Gameplay.Interact.performed += ctx => InteractPressed();
         playerControls.Dialogue.Continue.performed += ctx => ContinuePressed();
     }
-
-    private void OnDestroy()
-    {
-        GameManager.onUnPaused -= UnPauseGame;
-        playerControls.Gameplay.Pause.performed -= PauseGame;
-        playerControls.Menu.Pause.performed -= PauseGame;
-        playerControls.Gameplay.Mouse.performed -= ctx => mouseScreenPosition = ctx.ReadValue<Vector2>();
-        playerControls.Gameplay.Move.performed -= ctx => moveDirection = ctx.ReadValue<Vector2>();
-        playerControls.Gameplay.Scrap.performed -= ctx => ScrapShot();
-        playerControls.Gameplay.Magnetize.performed -= ctx => Magnetize();
-        playerControls.Gameplay.Spin.performed -= ctx => Melee();
-        playerControls.Gameplay.Grapple.performed -= ctx => GrappleStart();
-        playerControls.Gameplay.Grapple.canceled -= ctx => GrappleStop();
-        playerControls.Gameplay.Aim.performed -= ctx => aimDirection = ctx.ReadValue<Vector2>();
-        playerControls.Gameplay.Interact.performed -= ctx => InteractPressed();
-        playerControls.Dialogue.Continue.performed -= ctx => ContinuePressed();
-
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Ray mouseRay = Camera.main.ScreenPointToRay(mouseScreenPosition);
+    //    Gizmos.DrawLine(mouseRay.origin, mouseRay.origin + mouseRay.direction * 30);
+    //}
 }

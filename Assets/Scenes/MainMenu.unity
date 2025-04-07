@@ -1012,7 +1012,8 @@ PrefabInstance:
       propertyPath: EndScreen
       value: 
       objectReference: {fileID: 1195346955}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1804793534740944912, guid: ebf598f6c4bcb2b43ab014b39bb916f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

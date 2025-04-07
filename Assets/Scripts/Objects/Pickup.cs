@@ -48,13 +48,13 @@ public class Pickup : MonoBehaviour
         switch (pickup)
         {
             case PickupType.Ricochet:
-                GameManager.Instance.enableRicochet = true;
+                GameManager.enableRicochet = true;
                 break;
             case PickupType.KnockBack:
-                GameManager.Instance.increaseKnockBack = true;
+                GameManager.increaseKnockBack = true;
                 break;
             case PickupType.GrapplePull:
-                GameManager.Instance.enableGrapplePull = true;
+                GameManager.enableGrapplePull = true;
                 break;
             case PickupType.Health:
                 player.GetComponentInChildren<PlayerHealth>().Heal(20);
@@ -63,7 +63,7 @@ public class Pickup : MonoBehaviour
                 player.GetComponentInChildren<ScrapShot>().IncreaseAmmo(1);
                 break;
             case PickupType.AutoHeal:
-                GameManager.Instance.enableAutoHeal = true;
+                GameManager.enableAutoHeal = true;
                 break;
         }
         Destroy(gameObject);
