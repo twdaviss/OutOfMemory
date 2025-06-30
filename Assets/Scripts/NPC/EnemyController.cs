@@ -153,7 +153,7 @@ public class EnemyController : EnemyStateMachine
 
     public void StopMoving()
     {
-        enemyRigidbody.velocity = Vector3.zero;
+        enemyRigidbody.linearVelocity = Vector3.zero;
     }
 
     public void Pull(GameObject target, float startingSpeed, float targetSpeed)

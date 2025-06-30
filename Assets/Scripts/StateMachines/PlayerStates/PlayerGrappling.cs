@@ -62,7 +62,7 @@ namespace RobotGame.States
         {
             InputManager.onMelee -= Attack;
             player.playerAnimator.SetBool("isGrappling", false);
-            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.linearVelocity = Vector2.zero;
             
             yield break;
         }

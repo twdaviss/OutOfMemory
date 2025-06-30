@@ -19,7 +19,7 @@ namespace RobotGame.States
 
         public override IEnumerator Start()
         {
-            player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
             yield break;
         }

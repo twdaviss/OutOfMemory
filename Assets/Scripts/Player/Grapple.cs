@@ -175,8 +175,8 @@ public class Grapple : MonoBehaviour
 
         playerController.playerAnimator.SetBool("isBuildingUp", true);
 
-        if (aimDirection.x < 0) { playerController.playerSprite.flipX = false; }
-        else { playerController.playerSprite.flipX = true; }
+        if (aimDirection.x < 0) { playerController.Flip(false); }
+        else { playerController.Flip(true); }
 
         int layerMask = LayerMask.GetMask("Enemies") | LayerMask.GetMask("Grapple");
 

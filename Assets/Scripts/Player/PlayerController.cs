@@ -72,8 +72,30 @@ public class PlayerController : PlayerStateMachine
         {
             return;
         }
-        if (moveDirection.x < 0 || prevDirection.x < 0) { playerSprite.flipX = false; }
-        else { playerSprite.flipX = true; }
+        if (moveDirection.x < 0 || prevDirection.x < 0)
+        {
+            Flip(false);
+        }
+        else
+        {
+            Flip(true);
+        }
+    }
+
+    public void Flip(bool flip)
+    {
+        if (flip)
+        {
+            Vector3 scale = gameObject.transform.localScale;
+            scale.x = -1;
+            gameObject.transform.localScale = scale;
+        }
+        else
+        {
+            Vector3 scale = gameObject.transform.localScale;
+            scale.x = 1;
+            gameObject.transform.localScale = scale;
+        }
     }
 
     private void Attack()

@@ -47,7 +47,7 @@ public class Scrap : MonoBehaviour
 
     void Update()
     {
-        if(scrapRigidbody.velocity.magnitude > 2.0f)
+        if(scrapRigidbody.linearVelocity.magnitude > 2.0f)
         {
             transform.Rotate(0, 360 * Time.deltaTime, 360 * Time.deltaTime, Space.World);
         }
@@ -85,7 +85,7 @@ public class Scrap : MonoBehaviour
 
     public void ClampVelocity()
     {
-        scrapRigidbody.velocity = Vector3.ClampMagnitude(scrapRigidbody.velocity, 5);
+        scrapRigidbody.linearVelocity = Vector3.ClampMagnitude(scrapRigidbody.linearVelocity, 5);
         inert = true;
     }
 
@@ -102,7 +102,7 @@ public class Scrap : MonoBehaviour
     public void Magnetize()
     {
         isMagnetized = true;
-        scrapRigidbody.velocity = Vector2.zero;
+        scrapRigidbody.linearVelocity = Vector2.zero;
     }
 
     public void Ricochet()
