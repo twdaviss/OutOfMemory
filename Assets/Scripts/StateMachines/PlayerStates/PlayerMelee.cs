@@ -20,7 +20,18 @@ namespace RobotGame.States
         public override IEnumerator Start()
         {
             player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
-
+            if(player.gameObject.GetComponentInChildren<Melee>().comboCounter == 1)
+            {
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+            else if (player.gameObject.GetComponentInChildren<Melee>().comboCounter == 2)
+            {
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            }
+            else if (player.gameObject.GetComponentInChildren<Melee>().comboCounter == 3)
+            {
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            }
             yield break;
         }
 

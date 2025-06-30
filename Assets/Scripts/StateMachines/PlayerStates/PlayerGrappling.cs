@@ -42,7 +42,6 @@ namespace RobotGame.States
                 if (meleePressed)
                 {
                     player.playerMelee.Attack();
-                    Debug.Log("Combo achieved");
                 }
                 else
                 {

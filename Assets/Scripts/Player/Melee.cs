@@ -9,11 +9,14 @@ public class Melee : MonoBehaviour
     [SerializeField] private float knockBack;
     [SerializeField] private float duration;
     [SerializeField] private AudioClip swoosh;
+    [SerializeField] private float comboTime;
 
     private PlayerController playerController;
     private float meleeCooldownTime = 1.0f;
     private float meleeCooldownTimer;
     private bool isDealingDamage = false;
+    public int comboCounter = 0;
+    private float comboTimer = 0.0f;
 
     private float currentKnockback;
 
@@ -36,6 +39,18 @@ public class Melee : MonoBehaviour
         {
             currentKnockback = knockBack;
         }
+
+        if(comboCounter > 0 && comboTimer <= 0.0f)
+        {
+            comboTimer = 0.0f;
+            comboCounter = 0;
+            meleeCooldownTimer = 0.0f;
+        }
+        else
+        {
+            comboTimer -= Time.deltaTime;
+        }
+        Debug.Log(comboCounter);
         meleeCooldownTimer += Time.deltaTime;
         if(isDealingDamage)
         {
@@ -58,19 +73,9 @@ public class Melee : MonoBehaviour
         GameManager.Instance.SetMeleeCooldownUI(meleeCooldownTimer/ meleeCooldownTime);
     }
 
-    public void StartDealDamage()
-    {
-        isDealingDamage = true;
-    }
-
-    public void StopDealDamage()
-    {
-        isDealingDamage = false;
-    }
-
     public void TryAttack()
     {
-        if (playerController.GetCurrentState() == "PlayerGrappling")
+        if (playerController.GetCurrentState() == "PlayerGrappling" || playerController.GetCurrentState() == "PlayerMelee")
         {
             return;
         }
@@ -81,10 +86,19 @@ public class Melee : MonoBehaviour
     {
         if (meleeCooldownTimer >= meleeCooldownTime)
         {
-            meleeCooldownTimer = 0.0f;
+            comboCounter++;
+            comboTimer = comboTime;
+
             GetComponentInParent<AudioSource>().PlayOneShot(swoosh);
             playerController.TransitionState(new PlayerMelee(playerController, radius, damage, stun, knockBack, duration));
             playerController.playerAnimator.SetBool("isMeleeing", true);
+
+            if(comboCounter >= 3)
+            {
+                comboCounter = 0;
+                meleeCooldownTimer = 0;
+                comboTimer = 0;
+            }
         }
     }
 
