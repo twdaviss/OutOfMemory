@@ -88,9 +88,20 @@ public class Melee : MonoBehaviour
         {
             comboCounter++;
             comboTimer = comboTime;
+            switch(comboCounter)
+            {
+                case 1:
+                    playerController.TransitionState(new PlayerMelee(playerController, radius, damage, stun, 0, duration));
+                    break;
+                case 2:
+                    playerController.TransitionState(new PlayerMelee(playerController, radius, damage * 2, stun, 0, duration));
+                    break;
+                case 3:
+                    playerController.TransitionState(new PlayerMelee(playerController, radius, damage * 3, stun, knockBack, duration));
+                    break;
+            }
 
             GetComponentInParent<AudioSource>().PlayOneShot(swoosh);
-            playerController.TransitionState(new PlayerMelee(playerController, radius, damage, stun, knockBack, duration));
             playerController.playerAnimator.SetBool("isMeleeing", true);
 
             if(comboCounter >= 3)
