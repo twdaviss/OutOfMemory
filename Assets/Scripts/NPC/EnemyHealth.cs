@@ -60,6 +60,7 @@ public class EnemyHealth : MonoBehaviour
             if(isGrappled)
             {
                 damage *= 1.5f;
+                Debug.Log("Grapple damage multiplied");
             }
             if(enemy.isStunned)
             {
@@ -98,10 +99,13 @@ public class EnemyHealth : MonoBehaviour
     public void SetGrappled()
     {
         isGrappled = true;
+        Stagger(grappledTime);
     }
 
     public void Stagger(float duration = 0.1f)
     {
         enemy.TransitionState(new EnemyStaggered(enemy, duration));
+        currentStaggerHealth = staggerHealth;
+        invincibilityTime = 0;
     }
 }

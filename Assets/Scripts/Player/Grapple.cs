@@ -167,7 +167,7 @@ public class Grapple : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(grappleStart);
             canGrappleAudio = false;
         }
-        GameManager.Instance.SetSlowMoTimeScale();
+        GameManager.Instance.SetSlowMoTimeScale(0.1f);
         GameManager.Instance.EnableHighlight();
         isAimingGrapple = true;
         Vector2 mousePosition = InputManager.Instance.GetMousePosition();

@@ -3600,6 +3600,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1340760282465729318, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
+      propertyPath: targetSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340760282465729318, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
+      propertyPath: startingSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1672617182521118099, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -3660,14 +3668,6 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7429379723091429669, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -375606902, guid: 3a7d956af3702e140aad35c73d37ef4c, type: 3}
-    - target: {fileID: 7429379723091429669, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: ee67dd62e1932564498fb962d9647ec8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

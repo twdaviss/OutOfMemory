@@ -174,6 +174,7 @@ public class EnemyController : EnemyStateMachine
             Damage(scrap.GetDamage(), scrap.GetStun());
             scrap.ClampVelocity();
         }
+        //can probably move this to the knockback state
         else if (collisionObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collisionObject.GetComponent<EnemyController>();

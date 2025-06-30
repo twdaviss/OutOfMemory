@@ -78,12 +78,12 @@ public class PlayerHealth : MonoBehaviour
                 currentHealth = 0;
                 PlayerDeath();
             }
-            if (currentStaggerHealth < 0.0f)
-            {
-                playerController.TransitionState(new PlayerStaggered(playerController, staggerTime));
-                currentStaggerHealth = staggerHealth;
-                staggerTimer = 0.0f;
-            }
+            //if (currentStaggerHealth < 0.0f)
+            //{
+            //    playerController.TransitionState(new PlayerStaggered(playerController, staggerTime));
+            //    currentStaggerHealth = staggerHealth;
+            //    staggerTimer = 0.0f;
+            //}
             audioSource.PlayOneShot(hurtSound);
             invincibilityTime = 0.2f;
         }
