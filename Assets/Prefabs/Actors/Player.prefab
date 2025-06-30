@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7932e20a6058c04e878a19bbc2d1c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMoveSpeed: 6
+  defaultMoveSpeed: 8
   footsteps: {fileID: 0}
   playerSprite: {fileID: 7429379723091429669}
   playerAnimator: {fileID: 7899832127833797893}
