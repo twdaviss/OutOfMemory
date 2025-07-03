@@ -43,14 +43,14 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 3000
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 1
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,8 +93,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -108,8 +108,276 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: -340.57617, y: 496.33795}
+        - {x: -340.57617, y: 500}
+        - {x: -393.31055, y: 500}
+        - {x: -393.31055, y: 499.26764}
+        - {x: -387.45117, y: 494.8731}
+        - {x: -375.73242, y: 490.47858}
+        - {x: -356.68945, y: 490.47858}
+      - - {x: 500, y: 483.15436}
+        - {x: 371.3379, y: 483.15436}
+        - {x: 276.12305, y: 480.22467}
+        - {x: 223.38867, y: 471.4356}
+        - {x: 63.720703, y: 469.97076}
+        - {x: -44.677734, y: 486.08405}
+        - {x: -135.49805, y: 486.08405}
+        - {x: -281.98242, y: 475.83014}
+        - {x: -390.38086, y: 461.1817}
+        - {x: -450.43945, y: 483.15436}
+        - {x: -469.48242, y: 477.29498}
+        - {x: -482.66602, y: 349.85358}
+        - {x: -491.45508, y: 138.91608}
+        - {x: -473.87695, y: 39.3067}
+        - {x: -489.99023, y: -127.685486}
+        - {x: -494.38477, y: -158.4472}
+        - {x: -494.38477, y: -196.53314}
+        - {x: -469.48242, y: -350.34174}
+        - {x: -469.48242, y: -499.7558}
+        - {x: -442, y: 427}
+      tessellationDetail: 0.15
+      bones: []
+      spriteID: 05380880aa5d82e428624a9f074b167d
+      internalID: 30865472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_1
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 500, y: 494.8731}
+        - {x: 252.92972, y: 500}
+        - {x: -429.68747, y: 500}
+        - {x: -499.99997, y: 484.6192}
+        - {x: -500, y: 479}
+        - {x: 500, y: 471}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14657fefaae875b4cb6a96d179ecac15
+      internalID: -2114610878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_2
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 500, y: 500}
+        - {x: 486.08405, y: 500}
+        - {x: 486.08405, y: 499.26764}
+        - {x: 491.94342, y: 494.8731}
+        - {x: 500, y: 494.8731}
+      - - {x: 500, y: 481.6895}
+        - {x: -302.0019, y: 490.47858}
+        - {x: -499.7558, y: 490.47858}
+        - {x: 456, y: 440}
+        - {x: 500, y: -499.7558}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e0d3538fa45e847a7471206715d52e
+      internalID: -878965329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: -440, y: 500}
+        - {x: -475.3418, y: 500}
+        - {x: -498.7793, y: 80.078156}
+        - {x: -498.7793, y: -274.41403}
+        - {x: -479.73633, y: -499.99997}
+        - {x: -458, y: -500}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e52b2be1a72825f4ca108fc44f9d2612
+      internalID: -65447728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_4
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87cb0b2843ff52049af42377dbb30dbb
+      internalID: -932685598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_5
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 499.26764, y: 210.44925}
+        - {x: 491.94342, y: 500}
+        - {x: 489.01373, y: 500}
+        - {x: 456, y: 497}
+        - {x: 476, y: -490}
+        - {x: 499.26764, y: -499.99997}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e4c0da93f9cd2468cc83708e226fe7
+      internalID: -1062446933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: -466, y: -458}
+        - {x: -497.31445, y: 500}
+        - {x: -500, y: 466.55273}
+        - {x: -500, y: -494.38477}
+        - {x: 500, y: -494.38477}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c8d0fa2a08bc4c4abaac357c70dfda6
+      internalID: -573901375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_7
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 482, y: -478}
+        - {x: -487, y: -460}
+        - {x: -499.99997, y: -498.7793}
+        - {x: 500, y: -498.7793}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b44a299f6dbb047b412ea87d564b59
+      internalID: -974988317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken_Concrete_Floor_8
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 500, y: 500}
+        - {x: 476, y: 500}
+        - {x: 469, y: -50}
+        - {x: 487, y: -393}
+        - {x: 500, y: -498.7793}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72fe99a58e51793478acbb4a9a405f96
+      internalID: -1205824535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -119,7 +387,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":3.0},"gridSpriteSize":{"x":1000.0,"y":1000.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Broken_Concrete_Floor_0: 30865472
+      Broken_Concrete_Floor_1: -2114610878
+      Broken_Concrete_Floor_2: -878965329
+      Broken_Concrete_Floor_3: -65447728
+      Broken_Concrete_Floor_4: -932685598
+      Broken_Concrete_Floor_5: -1062446933
+      Broken_Concrete_Floor_6: -573901375
+      Broken_Concrete_Floor_7: -974988317
+      Broken_Concrete_Floor_8: -1205824535
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
