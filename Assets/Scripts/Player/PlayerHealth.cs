@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static BuffableFloat currentMaxHealth;
     [SerializeField] private float maxHealth;
     [SerializeField] private int staggerHealthPercentage;
     [SerializeField] private float staggerTime;
@@ -24,6 +25,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        currentMaxHealth = new BuffableFloat(maxHealth);
+
         playerController = GetComponentInParent<PlayerController>();
         audioSource = GetComponentInParent<AudioSource>();
         currentHealth = maxHealth;
@@ -33,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        maxHealth = currentMaxHealth.GetValue();
         autoHeal = GameManager.Instance.enableAutoHeal;
         if (invincibilityTime > 0.0f) { invincibilityTime -= Time.deltaTime; }
         else
