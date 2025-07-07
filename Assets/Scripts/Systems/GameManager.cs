@@ -32,9 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoCount;
 
     public static GameManager Instance {  get; private set; }
-    private Pathfinding pathfinder;
-
     private Grid<PathNode> currentGrid;
+    public GridMap gridMap;
     public Grid<PathNode> ActiveGrid { get { return currentGrid; } }
     private float _gameSpeed = 1.0f;
     public float GameSpeed { get { return _gameSpeed; } }
@@ -104,9 +103,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            gridMap = gridMaps[0];
             currentGrid = gridMaps[0].GetGrid();
         }
-        pathfinder = new Pathfinding(currentGrid);
     }
     #endregion
 

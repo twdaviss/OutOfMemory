@@ -11,6 +11,7 @@ public class GridMap : MonoBehaviour
     [SerializeField] private float cellSize;
 
     private Grid<PathNode> grid;
+    private List<PathNode> walkableNodes;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class GridMap : MonoBehaviour
 
     public void InitializeGrid()
     {
+        walkableNodes = new List<PathNode>();
         int layerMask = LayerMask.GetMask("Obstacles") | LayerMask.GetMask("Grapple");
         foreach (PathNode node in grid.GetAllGridObjects())
         {
@@ -33,10 +35,16 @@ public class GridMap : MonoBehaviour
             {
                 node.isWalkable = false;
             }
+            else
+            {
+                walkableNodes.Add(node);
+            }
         }
     }
 
     public Grid<PathNode> GetGrid() { return grid; }
+
+    public List<PathNode> GetWalkableNodes() { return walkableNodes; }
 
     private void OnDrawGizmos()
     {
@@ -44,22 +52,14 @@ public class GridMap : MonoBehaviour
         {
             return;
         }
-        foreach (PathNode node in grid.GetAllGridObjects())
+        foreach (PathNode node in walkableNodes)
         {
             Vector3 pos = node.GetWorldCoords();
             pos.x += cellSize / 2;
             pos.y += cellSize / 2;
 
-            if (node.isWalkable)
-            {
-                Gizmos.color = new Color(0, 1, 0, 0.5f);
-                Gizmos.DrawCube(pos, new Vector3(grid.GetCellSize(), grid.GetCellSize(), grid.GetCellSize()));
-            }
-            else
-            {
-                Gizmos.color = new Color(1, 0, 0, 0.5f);
-                Gizmos.DrawCube(pos, new Vector3(grid.GetCellSize(), grid.GetCellSize(), grid.GetCellSize()));
-            }
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawCube(pos, new Vector3(grid.GetCellSize(), grid.GetCellSize(), grid.GetCellSize()));
         }
     }
 }
