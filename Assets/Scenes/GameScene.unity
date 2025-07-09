@@ -305,9 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 301841008982683883, guid: a2190d201d9bb3f4a9fcc27d4a23b8a8, type: 3}
   - {fileID: 5715173639943631024, guid: 680334326f41d754ca853040b892e4c7, type: 3}
-  startingRoom: {fileID: 1478696527838484371, guid: bb08cf8bf6787f5499545287077ae6f7, type: 3}
+  startingRoom: {fileID: 5715173639943631024, guid: a984b9ffdc709eb449a77a6472129f07, type: 3}
 --- !u!4 &1508084900
 Transform:
   m_ObjectHideFlags: 0
@@ -317,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 1508084898}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

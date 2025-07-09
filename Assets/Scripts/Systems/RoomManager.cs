@@ -6,6 +6,7 @@ public enum DoorPosition
     Left,
     Right,
     Top,
+    Bottom,
 }
 
 public class RoomManager : MonoBehaviour
@@ -18,21 +19,30 @@ public class RoomManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //int randIndex = Random.Range(0, rooms.Count);
-        //currentRoom = rooms[randIndex];
-        //rooms.RemoveAt(randIndex);
-
-        currentRoom = Instantiate(startingRoom);
+         currentRoom = Instantiate(startingRoom, transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //    if (!currentRoom.activeSelf)
-        //    {
-        //        currentRoom.SetActive(true);
-        //        currentRoom.
-        //    }
-        //
+        //if(currentRoom == null)
+        //{
+        //    DeleteCurrentRoom();
+        //}
+    }
+    public void DeleteCurrentRoom(DoorPosition direction)
+    {
+        previousDoorPosition = direction;
+        //rooms.Remove(currentRoom);
+        Destroy(currentRoom.gameObject);
+        SpawnRandomRoom();
+    }
+
+
+    public void SpawnRandomRoom()
+    {
+        int randIndex = Random.Range(0, rooms.Count);
+        currentRoom = Instantiate(rooms[randIndex], transform);
+        currentRoom.prevDoorPosition = previousDoorPosition;
     }
 }

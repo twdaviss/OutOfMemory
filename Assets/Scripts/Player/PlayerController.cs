@@ -115,7 +115,7 @@ public class PlayerController : PlayerStateMachine
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyProjectiles"))
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
             GetComponentInChildren<PlayerHealth>().DealDamage(10);
         }

@@ -50,7 +50,6 @@ public class Melee : MonoBehaviour
         {
             comboTimer -= Time.deltaTime;
         }
-        Debug.Log(comboCounter);
         meleeCooldownTimer += Time.deltaTime;
         if(isDealingDamage)
         {
