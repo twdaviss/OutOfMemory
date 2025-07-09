@@ -14,6 +14,7 @@ public enum GameScene
     Building,
     Street,
     Alley,
+    Gamescene,
 };
 public class GameManager : MonoBehaviour
 {

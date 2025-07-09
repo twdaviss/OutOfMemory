@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 43320868815337435}
   - component: {fileID: 4238241059693515378}
-  - component: {fileID: 301841008982683883}
+  - component: {fileID: 5715173639943631024}
   m_Layer: 0
-  m_Name: RoomTemplate
+  m_Name: RoomTemplate 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &301841008982683883
+--- !u!114 &5715173639943631024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
