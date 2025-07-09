@@ -14,7 +14,6 @@ namespace RobotGame.States
 
         public override IEnumerator Update()
         {
-            player.InputHandler();
             yield break;
         }
         
@@ -24,6 +23,7 @@ namespace RobotGame.States
         }
         public override IEnumerator FixedUpdate()
         {
+            player.InputHandler();
             yield break;
         }
     }

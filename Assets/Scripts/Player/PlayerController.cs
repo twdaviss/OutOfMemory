@@ -59,7 +59,8 @@ public class PlayerController : PlayerStateMachine
         moveSpeed = defaultMoveSpeed;
         if (!GetComponentInChildren<Grapple>().CheckGrappling())
         {
-            transform.position += (Vector3)moveDirection.normalized * moveSpeed * Time.deltaTime;
+           Vector3 endPosition = transform.position + (Vector3)moveDirection.normalized * moveSpeed * Time.deltaTime;
+           GetComponent<Rigidbody2D>().MovePosition(endPosition);
         }
         playerAnimator.SetFloat("Horizontal", moveDirection.x);
         playerAnimator.SetFloat("Vertical", moveDirection.y);
