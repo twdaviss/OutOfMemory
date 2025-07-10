@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         DisableMenus();
+        Pathfinding pathfinder = new Pathfinding(ActiveGrid);
         return;
     }
 

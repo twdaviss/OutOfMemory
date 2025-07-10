@@ -10,23 +10,64 @@ public class Room : MonoBehaviour
     [SerializeField] private Transform leftEntrance;
     [SerializeField] private Transform rightEntrance;
     [SerializeField] private RoomTrigger exitTrigger;
-
+    
+    [Header("Enemies")]
+    [SerializeField] private int totalEnemies;
+    [SerializeField] private int numWaves;
+    [SerializeField] private int maxPerWave;
     private List<GameObject> enemiesActive;
+    private int enemiesDefeated = 0;
+    private int numLeftThisWave = 0;
 
     public DoorPosition prevDoorPosition;
 
     private void Start()
     {
         GameObject player = GameObject.Find("Player");
-
-        if(startingRoom)
+        enemiesActive = new List<GameObject>();
+        
+        numLeftThisWave = Random.Range(totalEnemies / 2 * numWaves, totalEnemies / 2);
+        //numLeftThisWave = Random.Range(totalEnemies - enemiesDefeated / 2 * numWaves, totalEnemies - enemiesDefeated / 2);
+        if (startingRoom)
         {
             prevDoorPosition = DoorPosition.Right;
+            exitTrigger.GetComponent<RoomTrigger>().doorDirection = DoorPosition.Right;
             exitTrigger.transform.position = rightEntrance.position;
+            exitTrigger.enabled = false;
+            SetPlayerPosition(player);
             return;
         }
 
-        SetPlayerPosition(prevDoorPosition, player);
+        SetPlayerPosition(player);
+        SetExitPosition();
+    }
+
+    private void Update()
+    {
+        if(enemiesDefeated >= totalEnemies)
+        {
+            exitTrigger.enabled = true;
+            return;
+        }
+        
+        if(numLeftThisWave > 0)
+        {
+            SpawnEnemy();
+            numLeftThisWave--;
+        }
+        else if(enemiesActive.Count == 0)
+        {
+            if(totalEnemies - enemiesDefeated < 3)
+            {
+                numLeftThisWave = 3;
+                return;
+            }
+            numLeftThisWave = Random.Range(totalEnemies - enemiesDefeated / 2 * numWaves, totalEnemies - enemiesDefeated / 2);
+        }
+    }
+
+    private void SetExitPosition()
+    {
         int rand = Random.Range(0, 1);
         Vector3 triggerPos = topEntrance.transform.position;
         switch (prevDoorPosition)
@@ -55,9 +96,9 @@ public class Room : MonoBehaviour
                     exitTrigger.GetComponent<RoomTrigger>().doorDirection = DoorPosition.Right;
                 }
                 break;
-                case DoorPosition.Top:
+            case DoorPosition.Top:
                 rand = Random.Range(0, 2);
-                if(rand == 0)
+                if (rand == 0)
                 {
                     triggerPos = leftEntrance.position;
                     exitTrigger.GetComponent<RoomTrigger>().doorDirection = DoorPosition.Left;
@@ -80,9 +121,9 @@ public class Room : MonoBehaviour
         exitTrigger.transform.position = triggerPos;
     }
 
-    private void SetPlayerPosition(DoorPosition position, GameObject player)
+    private void SetPlayerPosition(GameObject player)
     {
-        switch (position)
+        switch (prevDoorPosition)
         {
             case DoorPosition.Left:
                 player.transform.position = rightEntrance.position;
@@ -104,9 +145,15 @@ public class Room : MonoBehaviour
         List<PathNode> walkableNodes = GameManager.Instance.gridMap.GetWalkableNodes();
 
         int randNodeIndex = Random.Range(0, walkableNodes.Count);
-        int randEnemyIndex = Random.Range(0, enemyPrefabs.Length);
+        int randEnemyIndex = Random.Range(0, enemyPrefabs.Length -1);
 
-        enemiesActive.Add(Instantiate(enemyPrefabs[randEnemyIndex], walkableNodes[randNodeIndex].GetWorldCoords(), Quaternion.identity));
+        Quaternion rot = enemyPrefabs[randEnemyIndex].transform.rotation;
+        enemiesActive.Add(Instantiate(enemyPrefabs[randEnemyIndex], walkableNodes[randNodeIndex].GetWorldCoords(),rot, this.transform));
     }
 
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemiesActive.Remove(enemy);
+        enemiesDefeated++;
+    }
 }

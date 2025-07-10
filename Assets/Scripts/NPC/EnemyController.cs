@@ -147,6 +147,11 @@ public class EnemyController : EnemyStateMachine
     }
     public IEnumerator Despawn()
     {
+        Room room = GetComponentInParent<Room>();
+        if (room != null)
+        {
+            room.RemoveEnemy(this.gameObject);
+        }
         Destroy(gameObject);
         yield return new WaitForSeconds(1.0f);
     }
