@@ -143,7 +143,6 @@ public class Room : MonoBehaviour
     private void SpawnEnemy()
     {
         List<PathNode> walkableNodes = GameManager.Instance.gridMap.GetWalkableNodes();
-
         int randNodeIndex = Random.Range(0, walkableNodes.Count);
         int randEnemyIndex = Random.Range(0, enemyPrefabs.Length -1);
 

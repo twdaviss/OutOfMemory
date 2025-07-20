@@ -222,6 +222,5 @@ public class Grapple : MonoBehaviour
     private void OnDisable()
     {
         InputManager.onScrapShot -= PullGrappleTarget;
-
     }
 }

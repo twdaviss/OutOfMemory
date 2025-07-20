@@ -54,6 +54,9 @@ public class InputManager : MonoBehaviour
     public delegate void OnMagnetizeScrap();
     public static event OnMagnetize onMagnetizeScrap;
 
+    public delegate void OnDash();
+    public static event OnDash onDash;
+
     void Awake()
     {
         if (Instance == null)
@@ -193,6 +196,10 @@ public class InputManager : MonoBehaviour
     private void Melee()
     {
         onMelee?.Invoke();
+    }
+    private void Dash()
+    {
+        onDash?.Invoke();
     }
 
     private void Magnetize()
@@ -376,6 +383,8 @@ public class InputManager : MonoBehaviour
         playerControls.Gameplay.Spin.performed += ctx => Melee();
         playerControls.Gameplay.Grapple.performed += ctx => GrappleStart();
         playerControls.Gameplay.Grapple.canceled += ctx => GrappleStop();
+        playerControls.Gameplay.Dash.performed += ctx => Dash();
+
         playerControls.Gameplay.Aim.performed += ctx => aimDirection = ctx.ReadValue<Vector2>();
         playerControls.Gameplay.Interact.performed += ctx => InteractPressed();
         playerControls.Dialogue.Continue.performed += ctx => ContinuePressed();
@@ -393,6 +402,8 @@ public class InputManager : MonoBehaviour
         playerControls.Gameplay.Spin.performed -= ctx => Melee();
         playerControls.Gameplay.Grapple.performed -= ctx => GrappleStart();
         playerControls.Gameplay.Grapple.canceled -= ctx => GrappleStop();
+        playerControls.Gameplay.Dash.performed -= ctx => Dash();
+
         playerControls.Gameplay.Aim.performed -= ctx => aimDirection = ctx.ReadValue<Vector2>();
         playerControls.Gameplay.Interact.performed -= ctx => InteractPressed();
         playerControls.Dialogue.Continue.performed -= ctx => ContinuePressed();
