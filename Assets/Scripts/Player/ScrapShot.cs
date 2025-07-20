@@ -9,6 +9,9 @@ public class ScrapShot : MonoBehaviour
     [SerializeField] private float scrapDamage;
     [SerializeField] private float scrapStun;
     [SerializeField] private float scrapRange;
+    [SerializeField] private int numPerShot;
+    [SerializeField] private int angle;
+
     [SerializeField] private float scrapCoolDownTime;
     [SerializeField] private float magnetizeRadius;
     [SerializeField] private AudioClip projectile;
@@ -53,8 +56,12 @@ public class ScrapShot : MonoBehaviour
     {
         if (coolDownTimer >= scrapCoolDownTime && !playerController.GetComponentInChildren<Grapple>().CheckGrappling())
         {
-            if (currentAmmo > 0)
+            for (int i = 0; i < numPerShot; i++)
             {
+                if(currentAmmo == 0)
+                {
+                    return;
+                }
                 scrapPool.Get();
                 audioSource.pitch = 1.5f;
                 audioSource.PlayOneShot(projectile);
@@ -104,7 +111,9 @@ public class ScrapShot : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position;
         spawnPosition.z -= 1;
-        Vector2 aimDirection = InputManager.Instance.GetAimDirection(transform.position); 
+        Vector2 aimDirection = InputManager.Instance.GetAimDirection(transform.position);
+        int randAngle = Random.Range(-angle, angle + 1);
+        aimDirection = Quaternion.Euler(0,0,randAngle) * aimDirection;
         scrap.SetParameters(scrapSpeed, scrapDamage, scrapStun, scrapRange, aimDirection, playerController.gameObject);
         scrap.transform.position = spawnPosition;
         scrap.gameObject.SetActive(true);
