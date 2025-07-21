@@ -725,10 +725,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmmo: 3
   scrapPrefab: {fileID: 3162969577572220229, guid: 5d7d1cb4dbdd508488cd5b2df08cd810, type: 3}
-  scrapSpeed: 400
+  scrapSpeed: 300
   scrapDamage: 10
   scrapStun: 20
   scrapRange: 10
+  numPerShot: 3
+  angle: 15
   scrapCoolDownTime: 0.5
   magnetizeRadius: 20
   projectile: {fileID: 8300000, guid: 474b62e28094ec24d8acaa34e53fe8dc, type: 3}

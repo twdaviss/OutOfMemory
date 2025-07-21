@@ -383,6 +383,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2015054996221164800, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
+      propertyPath: dashTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015054996221164800, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
+      propertyPath: dashSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052276281748958729, guid: e1ba6dadd6d10e249b115f4057bf955a, type: 3}
+      propertyPath: numScrap
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -917,6 +929,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -12.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8864584812158455770, guid: 1bdb985c37684b24abea05ff2067d7bb, type: 3}
+      propertyPath: m_LookaheadTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864584812158455770, guid: 1bdb985c37684b24abea05ff2067d7bb, type: 3}
+      propertyPath: m_LookaheadSmoothing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8858473964525915990, guid: 1bdb985c37684b24abea05ff2067d7bb, type: 3}
@@ -942,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1474688200
 MonoBehaviour:
   m_ObjectHideFlags: 0

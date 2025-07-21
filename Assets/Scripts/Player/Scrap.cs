@@ -19,6 +19,8 @@ public class Scrap : MonoBehaviour
     private float absorbTime = 0.0f;
     private int bounces = 2;
 
+    private float time = 0;
+
     [HideInInspector] public bool canRicochet = false;
     [HideInInspector] public bool inert = false;
     private void Awake()
@@ -33,6 +35,7 @@ public class Scrap : MonoBehaviour
         bounces = 2;
         scrapRigidbody.AddForce(direction * moveSpeed, ForceMode2D.Force);
         isMagnetized = false;
+        time = 0;
     }
 
     private void OnDisable()
@@ -47,7 +50,15 @@ public class Scrap : MonoBehaviour
 
     void Update()
     {
-        if(scrapRigidbody.linearVelocity.magnitude > 2.0f)
+        time += Time.deltaTime;
+        float mult = 1 - (time/ 5);
+        if (mult < 0)
+        {
+            mult = 0;
+        }
+        scrapRigidbody.linearVelocity *= mult;
+        
+        if (scrapRigidbody.linearVelocity.magnitude > 2.0f)
         {
             transform.Rotate(0, 360 * Time.deltaTime, 360 * Time.deltaTime, Space.World);
         }
