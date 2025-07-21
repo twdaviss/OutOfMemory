@@ -10,11 +10,12 @@ public class Melee : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private AudioClip swoosh;
     [SerializeField] private float comboTime;
+    [SerializeField] private int chanceForScrap;
+    [SerializeField] public GameObject scrap;
 
     private PlayerController playerController;
     private float meleeCooldownTime = 1.0f;
     private float meleeCooldownTimer;
-    private bool isDealingDamage = false;
     public int comboCounter = 0;
     private float comboTimer = 0.0f;
 
@@ -51,19 +52,6 @@ public class Melee : MonoBehaviour
             comboTimer -= Time.deltaTime;
         }
         meleeCooldownTimer += Time.deltaTime;
-        if(isDealingDamage)
-        {
-            int layerMask = LayerMask.GetMask("Enemies");
-
-            Collider2D[] targets = Physics2D.OverlapCircleAll(playerController.transform.position, radius, layerMask);
-            foreach (Collider2D target in targets)
-            {
-                if (target.gameObject.GetComponent<EnemyController>() != null)
-                {
-                    target.gameObject.GetComponent<EnemyController>().Damage(damage, stun, currentKnockback, (target.transform.position - playerController.transform.position).normalized);
-                }
-            }
-        }
     }
 
 
@@ -109,6 +97,17 @@ public class Melee : MonoBehaviour
                 meleeCooldownTimer = 0;
                 comboTimer = 0;
             }
+        }
+    }
+
+    public void SpawnScrap()
+    {
+        int rand = Random.Range(0, chanceForScrap);
+        if (rand == 0)
+        {
+            Vector3 position = playerController.transform.position;
+            position.z -= 1;
+            Instantiate(scrap, position, playerController.transform.rotation);
         }
     }
 

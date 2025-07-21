@@ -50,6 +50,10 @@ public class Scrap : MonoBehaviour
 
     void Update()
     {
+        if (scrapPool == null)
+        {
+            return;
+        }
         time += Time.deltaTime;
         float mult = 1 - (time/ 5);
         if (mult < 0)
@@ -71,11 +75,11 @@ public class Scrap : MonoBehaviour
             inert = false;
         }
         if (absorbTime < absorbDelay) { absorbTime += Time.deltaTime;}
-        lifeTime -= Time.deltaTime;
-        if(lifeTime <= 0)
-        {
-            scrapPool.Release(this);
-        }
+        //lifeTime -= Time.deltaTime;
+        //if(lifeTime <= 0)
+        //{
+        //    scrapPool.Release(this);
+        //}
     }
 
     public void SetParameters(float moveSpeed, float damage, float stun, float range, Vector2 direction, GameObject player)
@@ -121,6 +125,7 @@ public class Scrap : MonoBehaviour
         if(bounces <= 0)
         {
             ClampVelocity();
+            scrapPool.Release(this);
             return;
         }
         inert = false;
@@ -157,20 +162,50 @@ public class Scrap : MonoBehaviour
         {
             isMagnetized = false;
             absorbTime = 0;
+            if(scrapPool == null)
+            {
+                collision.gameObject.GetComponentInChildren<ScrapShot>().RefillAmmo(1);
+                Destroy(gameObject);
+                return;
+            }
             scrapPool.Release(this);
+            player.GetComponentInChildren<ScrapShot>().RefillAmmo(1);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        GameObject collisionObject = collision.gameObject;
+
+        if (scrapPool == null)
         {
+            return;
+        }
+
+        if (collisionObject.CompareTag("Enemy"))
+        {
+            if (inert)
+            {
+                return;
+            }
+            collisionObject.GetComponent<EnemyController>().Damage(damage, stun);
+
             if (canRicochet)
             {
-                prevEnemy = collision.gameObject;
+                prevEnemy = collisionObject;
                 Ricochet();
             }
+            else
+            {
+                ClampVelocity();
+                int chance = Random.Range(0, 3);
+                if (chance == 0)
+                {
+                    scrapPool.Release(this);
+                }
+            }
         }
+        
     }
 
 }

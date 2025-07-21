@@ -14,6 +14,7 @@ namespace RobotGame.States
         private float knockBack;
         private float duration;
         private float currentTime = 0.0f;
+        private bool droppedScrap = false;
 
         int layerMask = LayerMask.GetMask("Enemies");
 
@@ -42,9 +43,16 @@ namespace RobotGame.States
                 Collider2D[] targets = Physics2D.OverlapCircleAll(player.transform.position, radius, layerMask);
                 foreach (Collider2D target in targets)
                 {
-                    if (target.gameObject.GetComponent<EnemyController>() != null)
+                    GameObject targetObject = target.gameObject;
+                    if (targetObject.GetComponent<EnemyController>() != null)
                     {
-                        target.gameObject.GetComponent<EnemyController>().Damage(damage, stun, knockBack, (target.transform.position - player.transform.position).normalized);
+                        targetObject.GetComponent<EnemyController>().Damage(damage, stun, knockBack, (targetObject.transform.position - player.transform.position).normalized);
+
+                        if (!droppedScrap)
+                        {
+                            player.gameObject.GetComponentInChildren<Melee>().SpawnScrap();
+                            droppedScrap = true;
+                        }
                     }
                 }
                 currentTime += Time.deltaTime;

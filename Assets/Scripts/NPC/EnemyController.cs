@@ -48,7 +48,6 @@ public class EnemyController : EnemyStateMachine
     [SerializeField] public float fleeDistanceThreshold;
     [SerializeField] public float fleeTime;
 
-
     private ParticleSystem enemyParticleSystem;
     private AudioSource enemyAudioSource;
     private Rigidbody2D enemyRigidbody;
@@ -97,8 +96,6 @@ public class EnemyController : EnemyStateMachine
 
     public void Damage(float damage = 0, float stun = 0, float knockBack = 0, Vector2 direction = default)
     {
-        //if (invincibilityTime > 0.0f) { return; }
-
         if (damage > 0)
         {
             enemyHealth.DealDamage(damage, knockBack, direction);
@@ -108,8 +105,6 @@ public class EnemyController : EnemyStateMachine
         {
             enemyStun.DealDamage(stun); 
         }
-
-        //invincibilityTime = 0.1f;
     }
 
     public void Shoot(Vector2 direction, float speed)
@@ -169,18 +164,7 @@ public class EnemyController : EnemyStateMachine
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collisionObject = collision.gameObject;
-        if (collisionObject.CompareTag("PlayerProjectiles"))
-        {
-            if (collisionObject.GetComponent<Scrap>().inert)
-            {
-                return;
-            }
-            Scrap scrap = collisionObject.GetComponent<Scrap>();
-            Damage(scrap.GetDamage(), scrap.GetStun());
-            scrap.ClampVelocity();
-        }
-        //can probably move this to the knockback state
-        else if (collisionObject.CompareTag("Enemy"))
+        if (collisionObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collisionObject.GetComponent<EnemyController>();
             if(State.GetType() == typeof(EnemyKnockback))

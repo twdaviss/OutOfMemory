@@ -456,6 +456,8 @@ MonoBehaviour:
   duration: 0.1
   swoosh: {fileID: 8300000, guid: d04542fcdddcb2c40878a040c7063f62, type: 3}
   comboTime: 0
+  chanceForScrap: 2
+  scrap: {fileID: 120052016876731455, guid: 5d7d1cb4dbdd508488cd5b2df08cd810, type: 3}
   comboCounter: 0
 --- !u!1 &3565628548010297144
 GameObject:

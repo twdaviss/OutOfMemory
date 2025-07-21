@@ -70,6 +70,11 @@ public class ScrapShot : MonoBehaviour
         }
     }
 
+    public void SpawnScrap()
+    {
+        scrapPool.Get();
+    }
+
     private void Magnetize()
     {
         if (coolDownTimer < scrapCoolDownTime)
@@ -94,6 +99,10 @@ public class ScrapShot : MonoBehaviour
         currentAmmo += num;
     }
 
+    public void RefillAmmo(int num)
+    {
+        if (currentAmmo < maxAmmo) { currentAmmo += num; }
+    }
     public void EnableRicochet()
     {
         canRicochet = true;
@@ -125,7 +134,6 @@ public class ScrapShot : MonoBehaviour
     private void OnReturnToPool(Scrap scrap)
     {
         scrap.gameObject.SetActive(false);
-        currentAmmo++;
     }
 
     private void OnDestroyPoolObject (Scrap scrap)
