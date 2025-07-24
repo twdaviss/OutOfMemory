@@ -1,6 +1,14 @@
 using RobotGame.States;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
-
+[Serializable]
+public struct PlayerSaveData
+{
+    public int currency;
+    public List<GameObject> upgrades;
+}
 public class PlayerController : PlayerStateMachine
 {
     [SerializeField] private float defaultMoveSpeed;
@@ -112,6 +120,14 @@ public class PlayerController : PlayerStateMachine
     public string GetCurrentState()
     {
         return State.name;
+    }
+
+    public void Save(ref PlayerSaveData saveData)
+    {
+    }
+
+    public void Load(PlayerSaveData saveData)
+    {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

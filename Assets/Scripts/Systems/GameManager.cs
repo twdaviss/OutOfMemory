@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public bool enableGrapplePull = false;
     public bool enableAutoHeal = false;
 
+    public PlayerController playerController;
+
     private void Start()
     {
         if (Instance == null)
